@@ -55,5 +55,51 @@
 Т.е. с Ctr + F11 можем да завъртаме емулатора.
 
 
+## Как бутоните за възможни отговори да променят вида си като си кликнати?
+За целта ще използваме селектор (selector). 
+Нека имаме следния бутон "Pesho" в xml-а на активитито.
+```xml
+<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesho"
+        android:background="@drawable/pesho_selector"
+        android:onClick="peshoClicked"/>
+```
+Също в папката drawable имаме файла ```pesho_selector.xml``` със съдържание:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/pesho_pressed"
+        android:state_selected="true"></item>
+
+    <item android:drawable="@drawable/pesho_released"
+        android:state_selected="false"></item>
+
+</selector>
+```
+И също в папката drawable имаме две картиники pesho_pressed.png и pesho_released.png - първата е картинката на избран бутон, а втората - на неизбран бутон.
+
+И в activity-то, в което е бутона имаме:
+```java
+public void peshoClicked(View v) {
+    if(v.isSelected()) {
+        v.setSelected(false);
+    } else {
+        v.setSelected(true);
+    }
+}
+```
+
+Сега ще се случва следното: Когато опрационната система Андроид се чуди кой фон (backgrond) да сложи на бутона ще отвори файлът ```pesho_selector``` и там от там, ще види ще ако състоянието (state) на бутона е selected трябва да покаже картинката ```@drawable/pesho_pressed"```. Това става с кода
+```xml
+ <item android:drawable="@drawable/pesho_pressed"
+        android:state_selected="true"></item>
+```
+В противен случай трябва да покаже картинката ```@drawable/pesho_released```
+
+Когато потребителят кликне бутона ще се включи фукнцията ```peshoClicked(View v)```, която ще провери дали бутонът Пешо е селектиран. Ако не е селектиран ще го селектира, и обратното. Т.е. като се кликне на бутона ще се промени състението му от селектиран на неселектиран и обратното.
+
 
 
