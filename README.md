@@ -101,5 +101,43 @@ public void peshoClicked(View v) {
 
 Когато потребителят кликне бутона ще се включи фукнцията ```peshoClicked(View v)```, която ще провери дали бутонът Пешо е селектиран. Ако не е селектиран ще го селектира, и обратното. Т.е. като се кликне на бутона ще се промени състението му от селектиран на неселектиран и обратното.
 
+## Как бутоните за жокери да стават неактивни 
+Към бутноите за жокери има две изисквания:
+
+1. Като се натиснат веднъж да стават неактивни, т.е. да не могат да се кликнат втори път
+2. Като се наективни да се променя бутона (примерно да посивява), за да разбира потребителя, че бутонът е неактивен
+
+Нека имаме следният бутон в xml-a:
+```xml
+<Button
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:text="Joker"
+  android:onClick="jokerClicked"/>
+```
+Когато се кликне ще се извиква функцията ```jokerClicked``` от активитито:
+```java
+public void jokerClicked(View v) {
+  v.setEnabled(false);
+}
+```
+Така когато се кликне бутонът той ще се деактивира и няма да може да се клика повече.
+
+Сега остава да сменим картинката. Това, разбира се, ще направим със селектор. Към xml-а на бутона ще добавим ```android:background="@drawable/joker_selector"```. Това ще е селектора, който ще избира фон в зависимост от това дали бутонът е активен или не (enabled е true или false).
+В drawable във файла ```joker_selector.xml``` ще сложим следния код, който върши тази работи
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item android:drawable="@drawable/joker_enabled"
+      android:state_enabled="true"></item>
+
+  <item android:drawable="@drawable/joker_disabled"
+      android:state_enabled="false"></item>
+
+</selector>
+```
+Тук се предполага, че имаме две подходящи картинки joker_enabled и joker_disabled - за активен и неактивен бутон.
 
 
+ 
