@@ -36,3 +36,24 @@
 1. Въпросите да са разделени в три категории - лесни (от където ще се избират въпроси от 1 до 5), средни (за въпроски от 5 до 10) и трудни (за въпроси от 10 до 15).
 2. Въпросите от всяка категория се избират по случаен начин
 3. Добавянето на нови въпроси да става лесно.
+
+# Да направим потребителския интерфейс
+
+## Хоризонтална ориентация (landscape)
+Дори и да не знам как да направя приложението да работи само в хоризонтален режим мога да го разбера лесно като потъся в гугъл "android landscape oreintation only".  Първият резултат сочи към [този пост](http://stackoverflow.com/questions/8408197/android-landscape-only-orientation)
+
+Изисква се да добавим ```android:screenOrientation="landscape"``` към всяко Activity.
+Така ще имаме например
+```
+<activity
+    android:name=".MainActivity"
+    android:screenOrientation="landscape">
+```
+
+### Как да завъртим емулатора хоризонтално
+Търсим в гугъл ```android emulator landscape``` и първият резултат е [това](http://stackoverflow.com/questions/2618967/switching-to-landscape-mode-in-android-emulator).
+Т.е. с Ctr + F11 можем да завъртаме емулатора.
+
+
+
+
