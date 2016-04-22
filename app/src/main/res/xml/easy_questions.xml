@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questions>
+    <question>
+        <description>Колко е 2+3?</description>
+        <answer score="1">5</answer>
+        <answer score="0">14</answer>
+        <answer score="0">3.151528</answer>
+        <answer score="0">0</answer>
+    </question>
+    <question>
+        <description>Защо ползваме XML? </description>
+        <answer score="1">Защото работата с информация в тестов формат е удобна</answer>
+        <answer score="0">За да ни е по-трудно на школата</answer>
+        <answer score="0">Какво ползваме?!? </answer>
+        <answer score="0">Не знам</answer>
+    </question>
+</questions>

@@ -153,3 +153,116 @@ public void jokerClicked(View v) {
 
 Има много начини, по които можем да организираме кода, който се занимава с въпросите. Тук ще се спрем на един от най-ефективните от тях.
 
+## Класове за въпрос и отговор
+
+За да можем да работим лесно с въпросите и отговорите, ще ги представим като класове. 
+Първо нека направим класа Answer, който ще съдържа информацията за един _отговор_. Каква информация ни е нужна за отговор? - текстът на отговора и дали той е верен или грешен.
+```java
+public class Answer {
+    private int score;
+    private String text;
+}
+
+```
+
+В член променливата text ще пазим текста на въпроса, а в score - колко точки носи избирането на този въпрос (ако е грешен ще носи 0 точки, ако е верен 1).
+И двете променливи сме маркирали като ```private```, защото не искаме други класове да ги променят (така намаляваме възможността за грешки в програмата ни).
+
+За да може този клас да се използва, трябва да има конструктор (фукнция, която създава обекта) и get-eри (функции, които ни дават достъп до променливите). Добавянето на конструкури и гетери в Android Studio става лесно чрез клавишната комбинация Alt+Insert.
+С добавените get-ери и set-ери класът ще изглежда така:
+
+```java
+public class Answer {
+    
+    private int score;
+    private String text;
+
+    public Answer(int score, String text) {
+        this.score = score;
+        this.text = text;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public String getText() {
+        return text;
+    }
+}
+```
+
+Сега ни трябва още един клас ```Question```, който ще обединява всичко, което ни интересува относно един въпрос. Какво е то? - текста на въпроса и четирите възможни отговора:
+
+```java
+public class Question {
+
+    private String text;
+
+    private Answer anwers[] = new Answer[4];
+}
+```
+За да не правим четири променливи за всеки от отговорите, използваме масив от 4 елемента. Това има още едно предимство - ако в някой момент искаме да променим играта, така че всики въпрос да има 5 възможно отговора, ще можем да го направим много лесно.
+
+Отново добавяме конструктур и geter функции с ```Alt+Insert```.
+
+
+## Четене на въпроса от XML
+В начолото имахме изискването въпросите да се сменят и добавят лесно. Точно за това ще използваме XML.
+Защо? Защото XML-а е удобен. Така въпросите ще изглеждат по следния начин:
+
+```xml
+<questions>
+    <question>
+        <description>Колко е 2+3?</description>
+        <answer score="1">5</answer>
+        <answer score="0">14</answer>
+        <answer score="0">3.151528</answer>
+        <answer score="0">0</answer>
+    </question>
+    <question>
+        <description>Защо ползваме XML? </description>
+        <answer score="1">Защото работата с информация в тестов формат е удобна</answer>
+        <answer score="0">За да ни е по-трудно на школата</answer>
+        <answer score="0">Какво ползваме?!? </answer>
+        <answer score="0">Не знам</answer>
+    </question>
+</questions>
+```
+Освен това всички въпроси и отговори ще се намират на едно място, в един файл и в този файл ще има само въпроси.
+Използването на XML има множество предимства, които ще виждаме завбъдеще, но все още е рано да отбелязваме.
+
+
+### PullParser
+
+За да използваме удобствата на XML ще трябва да направим допълнителен клас, който превежда XML-а в Java код.
+Прието е такива класове да се наричат parser-и. Можем да си мислим за тях като преводачи. А самия процес на "превежщането" често се нарича ```parsing```.
+
+Ще създаздем нов клас ```QuestionsParser```, който да изполнява тази задача.
+[Кода на Parser-а можете да видите тук](./app/src/main/java/com/marinshalamanov/stanibogat/QuestionsParser.java)
+
+
+### Как да използваме QuestionsParser?
+
+Следният код прочита xml файла ```res/xml/easy_questions.xml``` и създава масива от въпроси ```questions```.
+
+```java
+Question[] questions = null; // създаваме празен масив за въпросите
+
+try {
+    // Взимаме файла res/xml/easy_questions.xml и го записваме в променливата parser
+    XmlResourceParser parser=getResources().getXml(R.xml.easy_questions); 
+    
+    // създаваме нов QuestionsParser и го записваме в променливата quizTextParser
+    QuestionsParser quizTextParser = new QuestionsParser();
+    
+    // превеждаме файла (parser) и преведеното записваме в масива questions
+    questions = quizTextParser.parseXml(parser);
+
+} catch (XmlPullParserException | IOException | Resources.NotFoundException e) { // ако се появи грешка
+
+    // изписваме в грешката в логовете
+    Log.e (getClass().toString(), "exception during parsing", e);
+}
+```
+
