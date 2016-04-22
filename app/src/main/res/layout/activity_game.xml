@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.marinshalamanov.stanibogat.GameActivity">
+
+
+    <TextView
+        android:id="@+id/questionsCounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 / 15"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/jokerChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="смяна"
+        android:layout_alignParentRight="true"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/jokerAudience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="публика"
+        android:layout_toLeftOf="@id/jokerChange"
+        android:layout_marginRight="30dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/joker5050"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50:50"
+        android:layout_toLeftOf="@id/jokerAudience"
+        android:layout_marginRight="30dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="сподели!"
+        android:layout_toLeftOf="@id/joker5050"
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/question"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_below="@id/questionsCounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Колко е 2+3?"
+        android:textSize="32sp"/>
+
+    <TextView
+        android:id="@+id/answ1"
+        android:layout_marginLeft="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="A. 3"
+        android:textSize="24sp"
+        android:layout_below="@id/question"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:id="@+id/answ2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B. 3"
+        android:textSize="24sp"
+        android:layout_alignTop="@id/answ1"
+        android:layout_toRightOf="@id/answ1"
+        android:layout_marginLeft="200dp"/>
+
+    <TextView
+        android:id="@+id/answ3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C. 3"
+        android:textSize="24sp"
+        android:layout_below="@id/answ1"
+        android:layout_alignLeft="@id/answ1"/>
+
+    <TextView
+        android:id="@+id/answ4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D. 3"
+        android:textSize="24sp"
+        android:layout_alignLeft="@id/answ2"
+        android:layout_below="@id/answ2"
+        />
+
+    <TextView
+        android:id="@+id/giveup"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Откажи се"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
