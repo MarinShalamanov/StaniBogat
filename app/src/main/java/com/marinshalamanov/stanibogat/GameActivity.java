@@ -1,6 +1,7 @@
 package com.marinshalamanov.stanibogat;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.net.Uri;
@@ -25,6 +26,7 @@ public class GameActivity extends AppCompatActivity {
 
     private Random random = new Random();
 
+    private int numberOfQuestionsShown = 0;
     private Question currentQuestion;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -57,8 +59,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void loadRandomQuestion() {
-        int randomIndex = random.nextInt(questions.length);
-        loadQuestion(randomIndex);
+        if (numberOfQuestionsShown < questions.length) {
+            int randomIndex = random.nextInt(questions.length);
+            loadQuestion(randomIndex);
+        } else {
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -81,6 +88,8 @@ public class GameActivity extends AppCompatActivity {
         answ2TV.setText(anwers[1].getText());
         answ3TV.setText(anwers[2].getText());
         answ4TV.setText(anwers[3].getText());
+
+        numberOfQuestionsShown++;
     }
 
     private String getRightAnswerText() {
@@ -123,7 +132,6 @@ public class GameActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-
 
         loadRandomQuestion();
     }
