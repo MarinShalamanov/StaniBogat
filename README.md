@@ -268,3 +268,16 @@ try {
 
 Такъв код е подходящо да бъде в onCreate метода на нашето Activity, за да може при всяко негово стартиране да се заредят въпросите.
 
+
+# Как да споделяме в социални медии
+
+Механизъмът са споделяне е следния - правим intent за споделяне и го изпълняваме. Така Андроид системата ще покаже диалогов прозорец с въпрос "С кое проиложение искаш да споделиш?" и потребителя ще избере от възможните. Примерен код:
+
+```java
+Intent intent = new Intent();
+intent.setAction(Intent.ACTION_SEND);
+
+intent.setType("text/plain");
+intent.putExtra(Intent.EXTRA_TEXT, URL_TO_SHARE);
+startActivity(Intent.createChooser(intent, "Share"));
+```
