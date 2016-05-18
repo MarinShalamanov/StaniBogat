@@ -28,11 +28,9 @@ public class GameActivity extends AppCompatActivity {
 
     private int numberOfQuestionsShown = 0;
     private Question currentQuestion;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+
+    private int numCorrectAnswers = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +45,7 @@ public class GameActivity extends AppCompatActivity {
         } catch (XmlPullParserException | IOException | Resources.NotFoundException e) {
             Log.e(getClass().toString(), "exception duiring parsing", e);
         }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     @Override
@@ -63,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
             int randomIndex = random.nextInt(questions.length);
             loadQuestion(randomIndex);
         } else {
-            Intent intent = new Intent(this, GameActivity.class);
+            Intent intent = new Intent(this, GameOverActivity.class);
             startActivity(intent);
         }
     }
@@ -115,7 +111,7 @@ public class GameActivity extends AppCompatActivity {
         return null;
     }
 
-    private void onAnswerClicked(View v) {
+    public void onAnswerClicked(View v) {
         TextView answerTV = (TextView) v;
 
         String rightAnswer = getRightAnswerText();
@@ -124,14 +120,21 @@ public class GameActivity extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Правилен отговор!");
+            builder.setPositiveButton("OK", null);
             AlertDialog dialog = builder.create();
             dialog.show();
+            numCorrectAnswers++;
+
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Грешен отговор!");
+            builder.setPositiveButton("OK", null);
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+
+        TextView stat = (TextView) findViewById(R.id.questionsCounts);
+        stat.setText(numCorrectAnswers + " / " + questions.length);
 
         loadRandomQuestion();
     }
@@ -140,39 +143,13 @@ public class GameActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Game Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.marinshalamanov.stanibogat/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Game Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.marinshalamanov.stanibogat/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+
     }
 }
