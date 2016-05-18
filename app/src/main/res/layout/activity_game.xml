@@ -71,7 +71,8 @@
         android:text="A. 3"
         android:textSize="24sp"
         android:layout_below="@id/question"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:onClick="onAnswerClicked"/>
 
     <TextView
         android:id="@+id/answ2"
@@ -81,7 +82,8 @@
         android:textSize="24sp"
         android:layout_alignTop="@id/answ1"
         android:layout_toRightOf="@id/answ1"
-        android:layout_marginLeft="200dp"/>
+        android:layout_marginLeft="150dp"
+        android:onClick="onAnswerClicked"/>
 
     <TextView
         android:id="@+id/answ3"
@@ -90,7 +92,8 @@
         android:text="C. 3"
         android:textSize="24sp"
         android:layout_below="@id/answ1"
-        android:layout_alignLeft="@id/answ1"/>
+        android:layout_alignLeft="@id/answ1"
+        android:onClick="onAnswerClicked"/>
 
     <TextView
         android:id="@+id/answ4"
@@ -100,6 +103,7 @@
         android:textSize="24sp"
         android:layout_alignLeft="@id/answ2"
         android:layout_below="@id/answ2"
+        android:onClick="onAnswerClicked"
         />
 
     <TextView

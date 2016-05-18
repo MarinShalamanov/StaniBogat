@@ -14,4 +14,11 @@
         <answer score="0">Какво ползваме?!? </answer>
         <answer score="0">Не знам</answer>
     </question>
+    <question>
+        <description>Кой е президент на България? </description>
+        <answer score="1">Бойко Борисов</answer>
+        <answer score="0">Ангела Меркел</answer>
+        <answer score="0">Барак Обама</answer>
+        <answer score="0">Марин</answer>
+    </question>
 </questions>

@@ -14,17 +14,20 @@
     <Button
         android:text="СТАРТ"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:onClick="onStartClicked"/>
 
     <Button
         android:text="РЕКОРД"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:onClick="onStatsClicked"/>
 
     <Button
         android:text="ИНТРО"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:onClick="onIntroClicked"/>
 
 
 </LinearLayout>

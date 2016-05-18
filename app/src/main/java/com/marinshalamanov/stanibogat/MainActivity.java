@@ -1,5 +1,6 @@
 package com.marinshalamanov.stanibogat;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.support.v7.app.AppCompatActivity;
@@ -20,21 +21,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Question[] questions = null;
 
-        try {
-            XmlResourceParser parser=getResources().getXml(R.xml.easy_questions);
-            QuestionsParser quizTextParser = new QuestionsParser();
-            questions = quizTextParser.parseXml(parser);
 
-        } catch (XmlPullParserException | IOException | Resources.NotFoundException e) {
-            Log.e(getClass().toString(), "exception duiring parsing", e);
-        }
 
-        Log.e(getClass().toString(), questions[0].getText());
+
     }
 
-    public void jokerClicked(View v) {
-        v.setEnabled(false);
+    public void onStartClicked(View v) {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    public void onStatsClicked(View v) {
+
+    }
+
+    public void onIntroClicked(View v) {
+
     }
 }
