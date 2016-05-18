@@ -41,7 +41,8 @@
         android:text="50:50"
         android:layout_toLeftOf="@id/jokerAudience"
         android:layout_marginRight="30dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:onClick="joker5050"/>
 
     <TextView
         android:id="@+id/share"

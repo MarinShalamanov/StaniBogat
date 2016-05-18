@@ -31,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
 
     private int numCorrectAnswers = 0;
 
-
+    private TextView answ1TV, answ2TV, answ3TV, answ4TV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
             Log.e(getClass().toString(), "exception duiring parsing", e);
         }
 
+        updateStat();
     }
 
     @Override
@@ -69,10 +70,10 @@ public class GameActivity extends AppCompatActivity {
         currentQuestion = questions[questionIndex];
 
         TextView questionTextTV = (TextView) findViewById(R.id.question);
-        TextView answ1TV = (TextView) findViewById(R.id.answ1);
-        TextView answ2TV = (TextView) findViewById(R.id.answ2);
-        TextView answ3TV = (TextView) findViewById(R.id.answ3);
-        TextView answ4TV = (TextView) findViewById(R.id.answ4);
+        answ1TV = (TextView) findViewById(R.id.answ1);
+        answ2TV = (TextView) findViewById(R.id.answ2);
+        answ3TV = (TextView) findViewById(R.id.answ3);
+        answ4TV = (TextView) findViewById(R.id.answ4);
 
         // load the question
         String questionText = currentQuestion.getText();
@@ -84,6 +85,11 @@ public class GameActivity extends AppCompatActivity {
         answ2TV.setText(anwers[1].getText());
         answ3TV.setText(anwers[2].getText());
         answ4TV.setText(anwers[3].getText());
+
+        answ1TV.setVisibility(View.VISIBLE);
+        answ2TV.setVisibility(View.VISIBLE);
+        answ3TV.setVisibility(View.VISIBLE);
+        answ4TV.setVisibility(View.VISIBLE);
 
         numberOfQuestionsShown++;
     }
@@ -133,10 +139,44 @@ public class GameActivity extends AppCompatActivity {
             dialog.show();
         }
 
-        TextView stat = (TextView) findViewById(R.id.questionsCounts);
-        stat.setText(numCorrectAnswers + " / " + questions.length);
+        updateStat();
 
         loadRandomQuestion();
+    }
+
+    public void joker5050(View v) {
+        v.setEnabled(false);
+
+        int wrongAnswerIdx;
+
+        int randomIndex;
+        Answer[] answers = currentQuestion.getAnwers();
+
+        while(true) {
+            randomIndex = random.nextInt(questions.length);
+            if (answers[randomIndex].getScore() == 0) {
+                wrongAnswerIdx = randomIndex;
+                break;
+            }
+        }
+
+        if (answers[0].getScore() == 0 && wrongAnswerIdx != 0) {
+            answ1TV.setVisibility(View.INVISIBLE);
+        }
+        if (answers[1].getScore() == 0 && wrongAnswerIdx != 1) {
+            answ2TV.setVisibility(View.INVISIBLE);
+        }
+        if (answers[2].getScore() == 0 && wrongAnswerIdx != 2) {
+            answ3TV.setVisibility(View.INVISIBLE);
+        }
+        if (answers[3].getScore() == 0 && wrongAnswerIdx != 3) {
+            answ4TV.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void updateStat() {
+        TextView stat = (TextView) findViewById(R.id.questionsCounts);
+        stat.setText(numCorrectAnswers + " / " + questions.length);
     }
 
     @Override

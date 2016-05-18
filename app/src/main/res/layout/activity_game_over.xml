@@ -36,5 +36,13 @@
         android:text="3 / 10"
         android:textSize="32sp"/>
 
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отначало"
+        android:onClick="restart"/>
+
 
 </RelativeLayout>
