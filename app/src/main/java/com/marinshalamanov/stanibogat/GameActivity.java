@@ -217,6 +217,14 @@ public class GameActivity extends AppCompatActivity {
         stat.setText(numberOfQuestionsShown + " / " + NUM_QUESTIONS_TO_SHOW);
     }
 
+    public void cancelClicked (View v) {
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra(GameOverActivity.EXTRA_TOTAL_QUESTIONS, numberOfQuestionsShown);
+        intent.putExtra(GameOverActivity.EXTRA_CORRECT_QUESTIONS, numCorrectAnswers);
+
+        startActivity(intent);
+    }
+
     @Override
     public void onStart() {
         super.onStart();

@@ -117,6 +117,7 @@
         android:text="Откажи се"
         android:textSize="24sp"
         android:layout_alignParentBottom="true"
+        android:onClick="cancelClicked"
         />
 
 </RelativeLayout>
