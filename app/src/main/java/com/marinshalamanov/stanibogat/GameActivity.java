@@ -196,8 +196,17 @@ public class GameActivity extends AppCompatActivity {
     public void jokerAudience(View v) {
         v.setEnabled(false);
 
+        String audienceAnswer;
+        if (random.nextInt(10) < 8) {
+            audienceAnswer = getRightAnswerText();
+        } else {
+            Answer[] answers = currentQuestion.getAnwers();
+            int randomAnswerIndex = random.nextInt(answers.length);
+            audienceAnswer = answers[randomAnswerIndex].getText();
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Публиката смята, че отговор B е правилен.");
+        builder.setMessage("Публиката смята, че верният отговор е " + audienceAnswer);
         builder.setPositiveButton("OK", null);
         AlertDialog dialog = builder.create();
         dialog.show();
