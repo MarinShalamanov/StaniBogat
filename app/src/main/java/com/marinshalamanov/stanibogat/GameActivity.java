@@ -4,16 +4,11 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -21,6 +16,8 @@ import java.io.IOException;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
+
+    private int NUM_QUESTIONS_TO_SHOW = 3;
 
     private Question[] questions = null;
 
@@ -32,6 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private int numCorrectAnswers = 0;
 
     private TextView answ1TV, answ2TV, answ3TV, answ4TV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +54,23 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void loadRandomQuestion() {
-        if (numberOfQuestionsShown < questions.length) {
-            int randomIndex = random.nextInt(questions.length);
+        if (numberOfQuestionsShown < NUM_QUESTIONS_TO_SHOW) {
+            int randomIndex;
+
+            while(true ) {
+                randomIndex = random.nextInt(questions.length);
+                if (!questions[randomIndex].isShown()) {
+                    break;
+                }
+            }
+
             loadQuestion(randomIndex);
+
         } else {
             Intent intent = new Intent(this, GameOverActivity.class);
-            intent.putExtra(GameOverActivity.EXTRA_TOTAL_QUESTIONS, questions.length);
+            intent.putExtra(GameOverActivity.EXTRA_TOTAL_QUESTIONS, NUM_QUESTIONS_TO_SHOW);
             intent.putExtra(GameOverActivity.EXTRA_CORRECT_QUESTIONS, numCorrectAnswers);
-            
+
             startActivity(intent);
         }
     }
@@ -71,6 +78,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void loadQuestion(int questionIndex) {
         currentQuestion = questions[questionIndex];
+        currentQuestion.setShow();
 
         TextView questionTextTV = (TextView) findViewById(R.id.question);
         answ1TV = (TextView) findViewById(R.id.answ1);
@@ -95,6 +103,7 @@ public class GameActivity extends AppCompatActivity {
         answ4TV.setVisibility(View.VISIBLE);
 
         numberOfQuestionsShown++;
+        updateStat();
     }
 
     private String getRightAnswerText() {
@@ -156,7 +165,7 @@ public class GameActivity extends AppCompatActivity {
         Answer[] answers = currentQuestion.getAnwers();
 
         while(true) {
-            randomIndex = random.nextInt(questions.length);
+            randomIndex = random.nextInt(answers.length);
             if (answers[randomIndex].getScore() == 0) {
                 wrongAnswerIdx = randomIndex;
                 break;
@@ -196,7 +205,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateStat() {
         TextView stat = (TextView) findViewById(R.id.questionsCounts);
-        stat.setText(numCorrectAnswers + " / " + questions.length);
+        stat.setText(numberOfQuestionsShown + " / " + NUM_QUESTIONS_TO_SHOW);
     }
 
     @Override

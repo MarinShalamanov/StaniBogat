@@ -21,4 +21,12 @@
         <answer score="0">Барак Обама</answer>
         <answer score="0">Марин</answer>
     </question>
+
+    <question>
+        <description>Коя е столицата на Българи?</description>
+        <answer score="1">София</answer>
+        <answer score="0">Истанбул</answer>
+        <answer score="0">Варна</answer>
+        <answer score="0">Павликени</answer>
+    </question>
 </questions>
