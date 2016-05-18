@@ -61,6 +61,9 @@ public class GameActivity extends AppCompatActivity {
             loadQuestion(randomIndex);
         } else {
             Intent intent = new Intent(this, GameOverActivity.class);
+            intent.putExtra(GameOverActivity.EXTRA_TOTAL_QUESTIONS, questions.length);
+            intent.putExtra(GameOverActivity.EXTRA_CORRECT_QUESTIONS, numCorrectAnswers);
+            
             startActivity(intent);
         }
     }
@@ -172,6 +175,23 @@ public class GameActivity extends AppCompatActivity {
         if (answers[3].getScore() == 0 && wrongAnswerIdx != 3) {
             answ4TV.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public void jokerChange(View v) {
+        v.setEnabled(false);
+
+        loadRandomQuestion();
+        numberOfQuestionsShown--;
+    }
+
+    public void jokerAudience(View v) {
+        v.setEnabled(false);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Публиката смята, че отговор B е правилен.");
+        builder.setPositiveButton("OK", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void updateStat() {

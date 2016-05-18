@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:text="смяна"
         android:layout_alignParentRight="true"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:onClick="jokerChange"/>
 
     <TextView
         android:id="@+id/jokerAudience"
@@ -32,7 +33,8 @@
         android:text="публика"
         android:layout_toLeftOf="@id/jokerChange"
         android:layout_marginRight="30dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:onClick="jokerAudience"/>
 
     <TextView
         android:id="@+id/joker5050"
