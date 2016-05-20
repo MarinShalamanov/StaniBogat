@@ -275,9 +275,8 @@ try {
 
 ```java
 Intent intent = new Intent();
-intent.setAction(Intent.ACTION_SEND);
 
 intent.setType("text/plain");
-intent.putExtra(Intent.EXTRA_TEXT, URL_TO_SHARE);
+intent.putExtra(Intent.EXTRA_TEXT, "here comets the text that'll be shared");
 startActivity(Intent.createChooser(intent, "Share"));
 ```
